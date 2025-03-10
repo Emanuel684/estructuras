@@ -21,7 +21,7 @@ class LinkedList:
             actual.siguiente = nuevo_nodo
         self.longitud += 1
 
-    def obtener(self, indice: int) -> 'Nodo':
+    def obtener(self, indice: int) -> "Nodo":
         """Obtiene el valor en el índice especificado."""
         if indice < 0 or indice >= self.longitud:
             raise IndexError("Índice fuera de rango")

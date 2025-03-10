@@ -3,7 +3,7 @@ from lista import LinkedList
 
 class Matriz:
     def __init__(self, filas: int, columnas: int):
-        """ Constructor de la clase Matriz.
+        """Constructor de la clase Matriz.
         :param filas: Número de filas (m).
         :param columnas: Número de columnas (n).
         """
