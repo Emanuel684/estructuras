@@ -1,5 +1,5 @@
-from lista import DoubleLinkedList
 from libro import Libro
+from lista import DoubleLinkedList
 from ordenacion import LibroController
 
 
@@ -14,7 +14,7 @@ def Taller3():
 
     # 2. Ordenar por rating
     print("\nOrdenando por rating descendente...")
-    libros_ordenados = LibroController.ordenar_por_rating(libros_lista)
+    libros_ordenados = LibroController.ordenarPorRating(libros_lista)
 
     print("\nTop 5 libros por rating:")
     LibroController.head(libros_ordenados)
@@ -24,15 +24,15 @@ def Taller3():
 
     # 3. Ordenar por diferentes comparadores
     print("\nOrdenando por autor:")
-    LibroController.listar_por_comparador(libros_lista, LibroController.comparador_autor)
+    LibroController.listarPorComparador(libros_lista, LibroController.comparador_autor)
 
     print("\nOrdenando por ratings_count descendente:")
-    LibroController.listar_por_comparador(
+    LibroController.listarPorComparador(
         libros_lista, LibroController.comparador_ratings_count, reverse=True
     )
 
     print("\nOrdenando por fecha de publicación:")
-    LibroController.listar_por_comparador(libros_lista, LibroController.comparador_fecha)
+    LibroController.listarPorComparador(libros_lista, LibroController.comparador_fecha)
 
     # 4. Medición de tiempos
     print("\nRealizando mediciones de tiempo...")
@@ -45,7 +45,7 @@ def Taller3():
 
     resultados = {"builtin": {}, "quicksort": {}}
 
-    K = 20
+    K = 21
     for alg in ["builtin", "quicksort"]:
         for comp_name, comp_func in comparadores.items():
             tiempos = []

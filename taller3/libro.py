@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 from functools import total_ordering
 from typing import List, Optional
 
@@ -36,8 +37,8 @@ class Libro:
     def __str__(self):
         return (
             f"Libro(title='{self.title}', authors='{self.authors}', "
-            f"rating={self.average_rating}, pages={self.num_pages}, "
-            f"published='{self.publication_date}')"
+            f"average_rating={self.average_rating}, num_pages={self.num_pages}, "
+            f"publication_date='{self.publication_date}')"
         )
 
     __repr__ = __str__
@@ -54,10 +55,11 @@ class Libro:
         with open(archivo, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for i, row in enumerate(reader):
+                # print("row", row)
                 try:
                     # Validar campos numéricos
-                    if not row["num_pages"].isdigit():
-                        row["num_pages"] = None
+                    if not row["  num_pages"].isdigit():
+                        row["  num_pages"] = None
 
                     libro = Libro(
                         book_id=row["bookID"],
@@ -67,12 +69,14 @@ class Libro:
                         isbn=row["isbn"],
                         isbn13=row["isbn13"],
                         language_code=row["language_code"],
-                        num_pages=row["num_pages"],
+                        num_pages=row["  num_pages"],
                         ratings_count=row["ratings_count"],
                         text_reviews_count=row["text_reviews_count"],
                         publication_date=row["publication_date"],
                         publisher=row["publisher"],
                     )
+                    datetime.strptime(libro.publication_date, "%m/%d/%Y")
+
                     libros.append(libro)
                 except (ValueError, KeyError) as e:
                     print(f"Error en línea {i + 1}: {e}. Registro omitido.")
