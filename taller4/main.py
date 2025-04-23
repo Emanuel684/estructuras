@@ -1,16 +1,23 @@
-# This is a sample Python script.
+from AnalisisDatos import AnalisisDatos
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+if __name__ == "__main__":
+    # Cargar datos
+    libros = AnalisisDatos.leerCSV("books.csv")
 
+    # 1. Indexar por autor
+    bst_autores = AnalisisDatos.indexarPorAutor(libros)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    # 2. Top M libros de un autor
+    autor = "J.K. Rowling"
+    m = 5
+    top_libros = AnalisisDatos.topM(bst_autores, autor, m)
 
+    print(f"Top {m} libros de {autor}:")
+    for i, libro in enumerate(top_libros):
+        print(f"{i + 1}. {libro}")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    # 3. Estadísticas por editorial
+    stats_editorial = AnalisisDatos.estadisticasEditorial(libros)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # 4. Top M editoriales
+    AnalisisDatos.topMEditoriales(stats_editorial, 5)
