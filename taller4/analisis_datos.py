@@ -1,9 +1,13 @@
 import csv
+from collections import defaultdict
 from datetime import datetime
 from typing import List
 
-from Auxiliares import BST, Bag, MaxPQ
+from bag import Bag
+from bst import BST
 from libro import Libro
+from max_pq import MaxPQ
+from valoracion import Valoracion
 
 
 class AnalisisDatos:
@@ -14,7 +18,6 @@ class AnalisisDatos:
         with open(archivo, "r", encoding="utf-8") as f:
             reader = csv.DictReader(f)
             for i, row in enumerate(reader):
-                # print("row", row)
                 try:
                     # Validar campos numéricos
                     if not row["  num_pages"].isdigit():
@@ -51,7 +54,6 @@ class AnalisisDatos:
         Returns:
             BST: Árbol binario de búsqueda con autores como llaves y Bags de libros como valores
         """
-        from collections import defaultdict
 
         # Usamos un diccionario temporal para agrupar por autor
         autores_dict = defaultdict(list)
@@ -104,29 +106,7 @@ class AnalisisDatos:
         Returns:
             BST: Árbol con editoriales como llaves y objetos Valoracion como valores
         """
-        from collections import defaultdict
-
         # Definimos la clase Valoracion aquí si no está definida a nivel global
-        class Valoracion:
-            def __init__(self):
-                self.cantidad_libros = 0
-                self.suma_ratings = 0.0
-
-            @property
-            def promedio(self):
-                return (
-                    self.suma_ratings / self.cantidad_libros
-                    if self.cantidad_libros > 0
-                    else 0.0
-                )
-
-            def agregar_libro(self, rating):
-                self.cantidad_libros += 1
-                self.suma_ratings += rating
-
-            def __str__(self):
-                return f"Libros: {self.cantidad_libros}, Rating promedio: {self.promedio:.2f}"
-
         # Usamos un diccionario temporal para agrupar por editorial
         editoriales_dict = defaultdict(Valoracion)
         for libro in libros:
@@ -142,34 +122,6 @@ class AnalisisDatos:
             bst.put(editorial, valoracion)
 
         return bst
-
-    # @staticmethod
-    # def estadisticasEditorial(libros):
-    #     """Calcula estadísticas por editorial.
-    #
-    #     Args:
-    #         libros (list): Lista de objetos Libro
-    #
-    #     Returns:
-    #         BST: Árbol con editoriales como llaves y objetos Valoracion como valores
-    #     """
-    #     from collections import defaultdict
-    #
-    #     # Usamos un diccionario temporal para agrupar por editorial
-    #     editoriales_dict = defaultdict(valoracion)
-    #     for libro in libros:
-    #         editorial = libro.publisher
-    #         if not editorial:  # Si no tiene editorial, saltamos
-    #             continue
-    #         valoracion = editoriales_dict[editorial]
-    #         valoracion.agregar_libro(libro.average_rating)
-    #
-    #     # Convertimos el diccionario a un BST
-    #     bst = BST()
-    #     for editorial, valoracion in editoriales_dict.items():
-    #         bst.put(editorial, valoracion)
-    #
-    #     return bst
 
     @staticmethod
     def topMEditoriales(valoracionEditorial, m):

@@ -4,7 +4,6 @@ import time
 
 import matplotlib.pyplot as plt
 import numpy as np
-
 from matriz import Matriz
 
 

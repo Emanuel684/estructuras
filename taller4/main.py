@@ -1,4 +1,4 @@
-from AnalisisDatos import AnalisisDatos
+from analisis_datos import AnalisisDatos
 
 if __name__ == "__main__":
     # Cargar datos
